@@ -11,10 +11,9 @@
             background-color: #fce4ec;
             margin: 0;
             padding: 20px;
-            padding-bottom: 100px;
         }
 
-        /* --- BARRA SUPERIOR PISCANTE --- */
+        /* --- BARRA SUPERIOR --- */
         .marquee-container {
             width: 100%;
             overflow: hidden;
@@ -35,118 +34,92 @@
             animation: scroll 15s linear infinite, blink 1s step-start infinite;
         }
 
-        @keyframes scroll {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
+        @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        /* --- GALERIA DE IMAGENS --- */
+        /* --- GALERIA --- */
         .gallery {
             margin-top: 80px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            /* Adicionei uma transparência leve para destacar o easter egg quando ele aparecer */
-            opacity: 0.8; 
+            padding-bottom: 50px;
         }
 
         .gallery img {
-            width: 300px;
+            width: 100%;
+            max-width: 300px; /* Garante que não estoure no celular */
             height: 300px;
             object-fit: cover;
             border-radius: 15px;
             border: 8px solid white;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, opacity 0.3s;
         }
 
-        .gallery img:hover {
-            transform: scale(1.05);
-            opacity: 1;
-        }
-
-        h2 { color: #c2185b; margin-top: 40px; }
-
-        /* --- ESTILOS DO NOVO EASTER EGG GIGANTE --- */
-        .easter-egg-container {
-            position: fixed;
-            /* Centraliza na tela */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2000; /* Fica acima de tudo */
-            
-            display: flex; /* Alinha a seta e o botão lado a lado */
+        /* --- FOOTER / EASTER EGG --- */
+        footer {
+            margin-top: 50px;
+            padding: 40px 20px;
+            border-top: 2px dashed #ff4081;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 30px;
+            gap: 20px;
         }
 
-        /* A Seta Comicamente Grande */
         .comic-arrow {
-            font-size: 10rem; /* Tamanho monstro */
+            font-size: 6rem;
             color: red;
-            text-shadow: 3px 3px 0px black;
-            animation: pointRight 0.8s ease-in-out infinite alternate;
+            text-shadow: 2px 2px 0px black;
+            animation: bounce 0.8s ease-in-out infinite alternate;
         }
 
-        @keyframes pointRight {
-            from { transform: translateX(0); }
-            to { transform: translateX(30px); } /* Move a seta para a direita */
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(20px); }
         }
 
-        /* O Botão Gigante */
         #eggTrigger {
             background-color: #ad1457;
             color: white;
             border: 4px solid white;
-            padding: 20px 40px;
+            padding: 15px 30px;
             border-radius: 30px;
             cursor: pointer;
-            font-size: 2.5rem; /* Fonte gigante */
+            font-size: 1.8rem;
             font-weight: bold;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width: fit-content;
         }
 
-        #eggTrigger:hover {
-            background-color: #d81b60;
-            transform: scale(1.05);
-        }
-
-        /* O Conteúdo Revelado Gigante */
         #eggContent {
-            display: none; /* Começa escondido */
+            display: none;
             margin-top: 20px;
             background-color: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            font-size: 4rem; /* Texto Carla Madeira gigante */
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 2.5rem;
             color: #795548;
             font-weight: 900;
-            border: 6px solid #795548;
-            text-transform: uppercase;
-            animation: popUp 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efeito de "pulo" */
+            border: 5px solid #795548;
         }
 
-        @keyframes popUp {
-            from { transform: scale(0); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        /* AJUSTE PARA TELAS GRANDES (DESKTOP) */
+        @media (min-width: 768px) {
+            .comic-arrow { font-size: 10rem; }
+            #eggTrigger { font-size: 3rem; padding: 25px 50px; }
+            #eggContent { font-size: 4.5rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="marquee-container">
-        <div class="scrolling-text">saudades de voces negas  saudades de voces nibbas saudades de voces</div>
+        <div class="scrolling-text">saudades de voces negass saudades de voces marrom baobao saudades de vocesç</div>
     </div>
 
-    <h2>Nossas Lembranças</h2>
+    <h2 style="margin-top: 100px; color: #c2185b;">Nossas Lembranças</h2>
 
     <div class="gallery">
         <img src="img1.jpeg" alt="Foto 1">
@@ -155,16 +128,13 @@
         <img src="img4.jpeg" alt="Foto 4">
     </div>
 
-    <div class="easter-egg-container">
-        <div class="comic-arrow">➡</div>
-        
-        <div>
-            <button id="eggTrigger">CLIQUE AQUI!</button>
-            <div id="eggContent">
-                🪵<br>CARLA MADEIRA
-            </div>
+    <footer>
+        <div class="comic-arrow">⬇</div>
+        <button id="eggTrigger">CLIQUE AQUI!</button>
+        <div id="eggContent">
+            🪵<br>CARLA MADEIRA
         </div>
-    </div>
+    </footer>
 
     <script>
         const triggerButton = document.getElementById('eggTrigger');
@@ -174,13 +144,12 @@
         triggerButton.addEventListener('click', function() {
             if (hiddenContent.style.display === "block") {
                 hiddenContent.style.display = "none";
-                arrow.style.display = "block"; // Mostra a seta de volta se fechar
+                arrow.style.display = "block";
             } else {
                 hiddenContent.style.display = "block";
-                arrow.style.display = "none"; // Esconde a seta quando abre para não poluir
+                arrow.style.display = "none";
             }
         });
     </script>
-
 </body>
 </html>
